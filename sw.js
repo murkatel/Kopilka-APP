@@ -1,5 +1,5 @@
 // Копилка — офлайн-работа веб-версии. Страница берётся из сети, а без сети — из сохранённой копии.
-var CACHE = 'kopilka-3.2-1794484789';
+var CACHE = 'kopilka-3.3-1794513675';
 var FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));

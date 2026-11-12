@@ -71,7 +71,7 @@ nav button.on i{filter:none;opacity:1}
 .cat.dust .cwrap{visibility:hidden}
 .cat .x{position:absolute;top:-5px;left:50%;margin-left:12px;width:22px;height:22px;border-radius:50%;background:var(--exp);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--bg);z-index:2}
 .edit .cat{touch-action:none}
-#trash{position:fixed;left:50%;bottom:74px;transform:translateX(-50%) translateY(160px);opacity:0;visibility:hidden;background:var(--card);color:var(--exp);border:2px dashed var(--exp);padding:12px 26px;border-radius:26px;font-weight:600;z-index:6;transition:transform .2s,opacity .2s,visibility .2s,background .15s,color .15s;white-space:nowrap;pointer-events:none}
+#trash{position:fixed;left:50%;bottom:calc(74px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(160px);opacity:0;visibility:hidden;background:var(--card);color:var(--exp);border:2px dashed var(--exp);padding:12px 26px;border-radius:26px;font-weight:600;z-index:6;transition:transform .2s,opacity .2s,visibility .2s,background .15s,color .15s;white-space:nowrap;pointer-events:none}
 #trash.on{transform:translateX(-50%);opacity:1;visibility:visible}
 #trash.hot{background:var(--exp);color:#fff;transform:translateX(-50%) scale(1.08)}
 .donut{grid-column:2/4;grid-row:2/4;position:relative;align-self:center;justify-self:center;width:100%;max-width:170px;aspect-ratio:1}
@@ -91,7 +91,7 @@ nav button.on i{filter:none;opacity:1}
 .bar{height:6px;border-radius:3px;background:var(--chip);overflow:hidden;margin-top:5px}
 .bar i{display:block;height:100%;border-radius:3px}
 .empty{text-align:center;color:var(--mut);padding:36px 10px}
-.fab{position:absolute;right:18px;bottom:76px;width:56px;height:56px;border-radius:50%;background:var(--pri);color:var(--pri-t);font-size:30px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.fab{position:absolute;right:18px;bottom:calc(76px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;background:var(--pri);color:var(--pri-t);font-size:30px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
 .btn{display:block;width:100%;padding:13px;border-radius:14px;background:var(--pri);color:var(--pri-t);font-weight:600;font-size:16px;text-align:center}
 .btn.ghost{background:var(--chip);color:var(--text);font-weight:500}
 .btn.danger{background:none;color:var(--exp)}
@@ -243,7 +243,7 @@ nav button.on i{transform:translateY(-1px) scale(1.12)}
 .calg button i{font-style:normal;font-size:9.5px;line-height:1.15}
 .calg button.td b{color:var(--pri)}
 .calg button.on{border-color:var(--pri);background:var(--card)}
-#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#222;color:#fff;padding:9px 16px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30;max-width:90%;width:max-content;text-align:center}
+#toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#222;color:#fff;padding:9px 16px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30;max-width:90%;width:max-content;text-align:center}
 #toast.on{opacity:.95}
 </style>
 </head>
@@ -272,7 +272,7 @@ nav button.on i{transform:translateY(-1px) scale(1.12)}
 'use strict';
 var A = window.Android || null;
 var COLORS=['#ef5350','#ec407a','#ab47bc','#7e57c2','#5c6bc0','#42a5f5','#26c6da','#26a69a','#66bb6a','#9ccc65','#ffca28','#ffa726','#ff7043','#8d6e63','#78909c','#546e7a'];
-var ICONS='@p3d 🎁 🎀 🖨️ 🛒 🍽️ ☕ 🍔 🍕 🍺 🚌 🚕 🚗 ⛽ ✈️ 🚆 🏠 🛋️ 💡 🚿 🔧 📱 💻 🌐 💊 🏥 🦷 🏋️ 🎬 🎮 🎵 📚 🎓 ✏️ 👕 👟 💄 💇 💐 🐶 🐱 👶 🧸 💼 💰 💵 💳 🏦 📈 🪙 🧰 🏖️ 🎉 ❤️ 🚬 🧾 📦 ⭐ 🔑 🍎 🥦 🍰 🍷 🚲 🛵 🅿️ 🛠️ 🧹 🧴 🪑 🎨 📷 ⚽ 🎣 🎟️ 💍 👓 🧳 🏕️ 💻 🖥️ 🔌 🧪 📰 🎤 🪴 🚿 🧾 🏧 💸 🤝'.split(' ');
+var ICONS='@p3d 🎁 🎀 🖨️ 🛒 🍽️ ☕ 🍔 🍕 🍺 🚌 🚕 🚗 🏍️ ⛽ ✈️ 🚆 🏠 🛋️ 💡 🚿 🔧 📱 💻 🌐 💊 🏥 🦷 🏋️ 🎬 🎮 🎵 📚 🎓 ✏️ 👕 👟 💄 💇 💐 🐶 🐱 👶 🧸 💼 💰 💵 💳 🏦 📈 🪙 🧰 🏖️ 🎉 ❤️ 🚬 🧾 📦 ⭐ 🔑 🍎 🥦 🍰 🍷 🚲 🛵 🅿️ 🛠️ 🧹 🧴 🪑 🎨 📷 ⚽ 🎣 🎟️ 💍 👓 🧳 🏕️ 🖥️ 🔌 🧪 📰 🎤 🪴 🏧 💸 🤝 🚙 🚚 🚇 🛴 🚢 🚁 🛞 🏡 🏢 🏨 🛏️ 🛁 🧺 🧼 🔨 🧱 🌳 🌷 🐟 🐾 🍞 🥩 🧀 🥛 🍣 🍜 🍦 🍫 🥤 🍻 🥂 💉 🩺 🧘 🏊 🚴 🎿 🏀 🎾 🎳 🎲 🎭 🎸 🎧 📺 👔 👗 👜 🧥 💎 ⌚ 🎒 🛍️ ✉️ 📞 🖊️ 🗂️ 🧮 💹 🏛️ ⚖️ 🚑 🙏 🎗️ ❄️ ☀️ 🔥 💧 ♻️ 🗑️ 🛡️ 🔒 🎯 🏆 🎂 🍼 🎄 ✂️ 💅 🕶️ ☂️ 🗺️ ⛺ 🚀 ⛵ 🎢 🎰 🧩'.split(' ');
 var CUR={BYN:'Br',RUB:'₽',USD:'$',EUR:'€',UAH:'₴',KZT:'₸',PLN:'zł',GBP:'£'};
 var MONTHS=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 var MSHORT=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
@@ -295,8 +295,8 @@ var J3=(function(){
   if(!gl)return {ok:false};
   var HP='#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n';
   // монеты с номером >= uFrom анимируются: uMode 0 — падают сверху (шар); uMode 1 — ребром летят из точки uSrc в горлышко/прорезь (uSlotY) и ложатся на место
-  var VS='attribute vec3 aP;attribute vec3 aN;attribute float aI;attribute vec3 aC;attribute vec3 aQ;uniform mat4 uVP,uM;uniform float uFrom,uT,uStag,uMode,uSlotY,uN,uShift;uniform vec3 uSrc;varying vec3 vN,vW;varying float vI;'+
-    'void main(){vec3 p=aP;vec3 nn=aN;'+
+  var VS='attribute vec3 aP;attribute vec3 aN;attribute float aI;attribute vec3 aC;attribute vec3 aQ;uniform mat4 uVP,uM;uniform float uFrom,uT,uStag,uMode,uSlotY,uN,uShift;uniform vec3 uSrc;varying vec3 vN,vW,vL;varying float vI;'+
+    'void main(){vec3 p=aP;vec3 nn=aN;vL=aP;'+
     'if(uMode>1.5){float tl=uT-(uN-1.-aI)*uStag;vec3 c0=aC+vec3(0.,uShift,0.);p=aP+vec3(0.,uShift,0.);if(tl>0.)p.y+=80.;else if(tl>-.36){float k=1.+tl/.36;float kk=k*k;p=vec3(c0.x*(1.-kk),mix(c0.y,uSlotY,kk),c0.z*(1.-kk))+(aP-aC);}}'+
     'else if(aI>=uFrom){float t=uT-(aI-uFrom)*uStag;'+
     'if(uMode<.5){float k=clamp(t/.5,0.,1.);p.y+=(1.-k*k)*3.6;if(t<0.)p.y+=80.;}'+
@@ -311,10 +311,12 @@ var J3=(function(){
     'float b2=smoothstep(-.86,-.78,R.x)*(1.-smoothstep(-.72,-.62,R.x))*smoothstep(-.3,.1,R.y)*(1.-smoothstep(.6,.9,R.y));'+
     'float a=mix(uG.x,uG.y,fr)*mix(.6,1.,uBack);vec3 c=uTint*(.78+.22*max(dot(N,L),0.));float hl=(sp+b1*.6+b2*.3)*uBack;'+
     'gl_FragColor=vec4(c*a+vec3(hl),min(1.,a+hl));}';
-  var FSOLID=HP+'varying vec3 vN,vW;varying float vI;uniform vec3 uCam,uCol;uniform float uCoin,uFlat;'+
-    'void main(){if(uFlat>.5){gl_FragColor=vec4(uCol,1.);return;}vec3 N=normalize(vN),V=normalize(uCam-vW);if(dot(N,V)<0.)N=-N;vec3 L=normalize(vec3(-.5,.75,.6)),H=normalize(L+V);float d=max(dot(N,L),0.);'+
+  var FSOLID=HP+'varying vec3 vN,vW,vL;varying float vI;uniform vec3 uCam,uCol;uniform float uCoin,uFlat;uniform vec4 uHole;'+
+    // uHole: прорезь в крышке (центр по x, полудлина, полуширина, вкл.) — эти пиксели просто не рисуются, и сквозь неё видно, что внутри банки
+    'void main(){float hd=1.;if(uHole.w>.5){float r=min(uHole.z,uHole.y);float dd=length(vec2(max(abs(vL.x-uHole.x)-max(uHole.y-r,0.),0.),vL.z))-r;if(dd<0.)discard;hd=dd;}'+
+    'if(uFlat>.5){gl_FragColor=vec4(uCol,1.);return;}vec3 N=normalize(vN),V=normalize(uCam-vW);if(dot(N,V)<0.)N=-N;vec3 L=normalize(vec3(-.5,.75,.6)),H=normalize(L+V);float d=max(dot(N,L),0.);'+
     'float sp=pow(max(dot(N,H),0.),mix(22.,46.,uCoin));vec3 al=uCol*mix(1.,.86+.28*fract(vI*.618),uCoin);float env=.55+.45*N.y;'+
-    'vec3 c=al*(.34+.66*d)*(.82+.3*env)+mix(vec3(1.),vec3(1.,.93,.66),uCoin)*sp*mix(.3,.85,uCoin);gl_FragColor=vec4(c,1.);}';
+    'vec3 c=al*(.34+.66*d)*(.82+.3*env)+mix(vec3(1.),vec3(1.,.93,.66),uCoin)*sp*mix(.3,.85,uCoin);if(uHole.w>.5)c*=.72+.28*smoothstep(0.,uHole.z*.7,hd);gl_FragColor=vec4(c,1.);}';
   var VSURF='attribute vec3 aP;uniform mat4 uVP;varying vec3 vW;void main(){vW=aP;gl_Position=uVP*vec4(aP,1.);}';
   var FSURF=HP+'varying vec3 vW;uniform float uKind,uMat,uFog;uniform vec3 uWall,uSh;'+
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
@@ -415,8 +417,8 @@ var J3=(function(){
     if(sh.slot){var Y=sh.lidY[1]+.004,L=sh.slot[0]/(k*sh.s),Wd=sh.slot[1]/(k*sh.s),pts=[],a;sl=[];
       for(a=0;a<=8;a++){var t=-Math.PI/2+a*Math.PI/8;pts.push([L-Wd+Wd*Math.cos(t),Wd*Math.sin(t)])}
       for(a=0;a<=8;a++){var t2=Math.PI/2+a*Math.PI/8;pts.push([-(L-Wd)+Wd*Math.cos(t2),Wd*Math.sin(t2)])}
-      for(a=0;a<pts.length;a++){var q=pts[(a+1)%pts.length];sl.push(0,Y,0,pts[a][0],Y,pts[a][1],q[0],Y,q[1])}}
-    return M.sz[g]={k:k,s:k*sh.s,coins:buf(c.data),cap:c.count,per:c.per,ys:c.ys,slotL:sh.slot?sh.slot[0]/(k*sh.s):0,slot:sl?buf(sl):null,slotN:sl?sl.length/3:0};
+      var Y0=Y-.075;for(a=0;a<pts.length;a++){var q=pts[(a+1)%pts.length],u=pts[a];sl.push(u[0],Y,u[1],q[0],Y,q[1],q[0],Y0,q[1], u[0],Y,u[1],q[0],Y0,q[1],u[0],Y0,u[1])}}
+    return M.sz[g]={k:k,s:k*sh.s,coins:buf(c.data),cap:c.count,per:c.per,ys:c.ys,slotL:sh.slot?sh.slot[0]/(k*sh.s):0,slotW:sh.slot?sh.slot[1]/(k*sh.s):0,slot:sl?buf(sl):null,slotN:sl?sl.length/3:0};
   }
   function quad(a,b,c,d){return [].concat(a,b,c,a,c,d)}
   function getSurf(){if(surf)return surf;var X=9,zf=1.75,th=.3;
@@ -439,7 +441,7 @@ var J3=(function(){
   function draw(sc,w,h){
     gl.viewport(0,0,w,h);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.depthMask(true);gl.disable(gl.CULL_FACE);gl.disable(gl.BLEND);
     var cm=sc.cam||{},pitch=cm.pitch==null?.2:cm.pitch,dist=cm.dist||8.1,tx=cm.tx||0,ty=cm.ty==null?1.28:cm.ty,eye=[tx,ty+dist*Math.sin(pitch),dist*Math.cos(pitch)];
-    var VP=mul(persp(.5,w/h,2.5,40),look(eye,[tx,ty,0])),B=BG3[sc.bg],S=getSurf(),p,fog=B?(B[2]?3.5:3.8):0;
+    var VP=mul(persp(.5,w/h,2.5,40),look(eye,[tx,ty,0])),B=BG3[sc.bg],S=getSurf(),p,fog=B?(B[2]?3.5:3.8)*(1+1.5*Math.max(0,Math.min(1,(pitch-.45)/.75))):0;
     if(B){p=P.surf;gl.useProgram(p.p);gl.uniformMatrix4fv(p.u.uVP,false,VP);gl.uniform1f(p.u.uMat,B[1]);gl.uniform1f(p.u.uFog,fog);gl.uniform3fv(p.u.uWall,B[2]||[1,1,1]);gl.uniform3fv(p.u.uSh,sc.sh||[0,0,0]);
       gl.uniform1f(p.u.uKind,0);attr(B[2]?S.topS:S.top,12);gl.drawArrays(gl.TRIANGLES,0,6);
       gl.uniform1f(p.u.uKind,1);attr(S.front,12);gl.drawArrays(gl.TRIANGLES,0,6);
@@ -450,15 +452,16 @@ var J3=(function(){
     var jars=sc.jars||[],parts=sc.parts||[];if(!jars.length&&!parts.length)return;
     var Pr=getPrim();p=P.solid;gl.useProgram(p.p);gl.uniformMatrix4fv(p.u.uVP,false,VP);gl.uniform3fv(p.u.uCam,eye);
     var still=function(pp){gl.uniform1f(pp.u.uFrom,1e7);gl.uniform1f(pp.u.uT,0);gl.uniform1f(pp.u.uStag,0);gl.uniform1f(pp.u.uMode,0);gl.uniform1f(pp.u.uSlotY,0);gl.uniform3f(pp.u.uSrc,0,0,0)};
-    still(p);gl.uniform1f(p.u.uCoin,0);
-    parts.forEach(function(q){gl.uniformMatrix4fv(p.u.uM,false,q.M);gl.uniform3fv(p.u.uCol,q.col);gl.uniform1f(p.u.uFlat,q.flat?1:0);
+    still(p);gl.uniform1f(p.u.uCoin,0);gl.uniform4f(p.u.uHole,0,0,0,0);
+    parts.forEach(function(q){gl.uniformMatrix4fv(p.u.uM,false,q.M);gl.uniform3fv(p.u.uCol,q.col);gl.uniform1f(p.u.uFlat,q.flat?1:0);if(q.hole)gl.uniform4f(p.u.uHole,q.hole[0],q.hole[1],q.hole[2],1);else gl.uniform4f(p.u.uHole,0,0,0,0);
       if(q.m==='cube'){attr(Pr.cube,24,true);gl.drawArrays(gl.TRIANGLES,0,Pr.cubeN)}else if(q.m==='sph'){attr(Pr.sph,24,true);gl.drawArrays(gl.TRIANGLES,0,Pr.sphN)}else{attr(q.m.buf,q.m.st||24,!q.m.st);gl.drawArrays(gl.TRIANGLES,0,q.m.n)}});
-    gl.uniform1f(p.u.uFlat,0);
+    gl.uniform1f(p.u.uFlat,0);gl.uniform4f(p.u.uHole,0,0,0,0);
     jars.forEach(function(j){var M=getMesh(j.style),Z=getSize(j.style,j.g);j._M=M;j._Z=Z;
       var lm=j.lid===false?null:(j.lid&&j.lid!==true?j.lid:j.M);
-      if(M.lid&&lm){gl.uniformMatrix4fv(p.u.uM,false,lm);gl.uniform3fv(p.u.uCol,j.lidCol);gl.uniform1f(p.u.uCoin,0);attr(M.lid,24,true);gl.drawArrays(gl.TRIANGLES,0,M.lidN);
-        var sk=j.slotK==null?1:j.slotK;   // прорезь может быть ещё не вырезана или вырезана частично (слева направо)
-        if(Z.slot&&sk>.01){if(sk<1)gl.uniformMatrix4fv(p.u.uM,false,MM(lm,Tm(-Z.slotL*(1-sk),0,0),Sm(sk,1,1)));gl.uniform1f(p.u.uFlat,1);gl.uniform3f(p.u.uCol,.05,.05,.06);attr(Z.slot,12);gl.drawArrays(gl.TRIANGLES,0,Z.slotN);gl.uniform1f(p.u.uFlat,0)}}
+      if(M.lid&&lm){var sk=j.slotK==null?1:j.slotK,cut=Z.slot&&sk>.01;   // прорезь может быть ещё не вырезана или вырезана частично (слева направо)
+        gl.uniformMatrix4fv(p.u.uM,false,lm);gl.uniform3fv(p.u.uCol,j.lidCol);gl.uniform1f(p.u.uCoin,0);if(cut)gl.uniform4f(p.u.uHole,-Z.slotL*(1-sk),Z.slotL*sk,Z.slotW,1);
+        attr(M.lid,24,true);gl.drawArrays(gl.TRIANGLES,0,M.lidN);gl.uniform4f(p.u.uHole,0,0,0,0);
+        if(cut){if(sk<1)gl.uniformMatrix4fv(p.u.uM,false,MM(lm,Tm(-Z.slotL*(1-sk),0,0),Sm(sk,1,1)));gl.uniform1f(p.u.uFlat,1);gl.uniform3f(p.u.uCol,j.lidCol[0]*.42,j.lidCol[1]*.42,j.lidCol[2]*.42);attr(Z.slot,12);gl.drawArrays(gl.TRIANGLES,0,Z.slotN);gl.uniform1f(p.u.uFlat,0)}}
       var n=Math.max(0,Math.min(Z.cap,j.n||0));
       if(n){gl.uniformMatrix4fv(p.u.uM,false,j.M);gl.uniform3f(p.u.uCol,1,.76,.2);gl.uniform1f(p.u.uCoin,1);
         if(j.from!=null&&j.from<n){gl.uniform1f(p.u.uFrom,j.from);gl.uniform1f(p.u.uT,j.t||0);gl.uniform1f(p.u.uStag,j.stag);gl.uniform1f(p.u.uMode,j.mode);gl.uniform1f(p.u.uSlotY,j.slotY);gl.uniform3fv(p.u.uSrc,j.src||[0,0,0]);gl.uniform1f(p.u.uN,n);gl.uniform1f(p.u.uShift,j.shift||0)}
@@ -614,7 +617,7 @@ var J3=(function(){
       if(tool.on){parts.push({m:'sph',M:MM(Tm(tool.x,tool.tip+.03,0),Sm(.07+.02*Math.sin(tt*40))),col:[1,.9,.5],flat:true});
         for(var sp=0;sp<8;sp++){var fl=(tt*3.2+sp/8)%1,sd=Math.floor(tt*3.2+sp/8)*8+sp,an=rnd(sd+1)*6.283,rr=.25+rnd(sd+2)*.45;
           parts.push({m:'cube',M:MM(Tm(tool.x+Math.cos(an)*rr*fl,tool.tip+.04+(.5+rnd(sd+3)*.5)*fl-1.3*fl*fl,Math.sin(an)*rr*fl*.6),Sm(.045*(1-fl)+.01)),col:[1,.75+.2*rnd(sd),.25],flat:true})}}}
-    if(oldCap){parts.push({m:{buf:M.lid,n:M.lidN},M:oldCap,col:lidCol});if(ZO.slot)parts.push({m:{buf:ZO.slot,n:ZO.slotN,st:12},M:oldCap,col:[.05,.05,.06],flat:true})}
+    if(oldCap){parts.push({m:{buf:M.lid,n:M.lidN},M:oldCap,col:lidCol,hole:ZO.slot?[0,ZO.slotL,ZO.slotW]:null});if(ZO.slot)parts.push({m:{buf:ZO.slot,n:ZO.slotN,st:12},M:oldCap,col:[lidCol[0]*.42,lidCol[1]*.42,lidCol[2]*.42],flat:true})}
     if(newCapM&&!newLid)parts.push({m:{buf:M.lid,n:M.lidN},M:newCapM,col:lidCol});
     if(yN<1.2)blobs.push([xN,0,ZN.k*(1-yN*.5)]);blobs.push([xR,0,.95]);if(oldJ&&!attached&&!gone)blobs.push([xO,0,ZO.k]);
     var jars=[newJ];if(oldJ)jars.push(oldJ);
@@ -710,8 +713,8 @@ function fixState(){
 
 function defaults(){
   var c=function(n,i,col,t){return{id:uid(),name:n,icon:i,color:col,type:t,budget:0}};
-  return {v:1,currency:'BYN',theme:'system',
-    accounts:[{id:uid(),name:'Наличные',icon:'💵',color:'#66bb6a',initial:0,currency:'BYN'},{id:uid(),name:'Карта',icon:'💳',color:'#42a5f5',initial:0,currency:'BYN'}],
+  return {v:1,currency:'RUB',theme:'system',
+    accounts:[{id:uid(),name:'Наличные',icon:'💵',color:'#66bb6a',initial:0,currency:'RUB'},{id:uid(),name:'Карта',icon:'💳',color:'#42a5f5',initial:0,currency:'RUB'}],
     categories:[c('Продукты','🛒','#66bb6a','expense'),c('Кафе','🍽️','#ffa726','expense'),c('Транспорт','🚌','#42a5f5','expense'),c('Дом','🏠','#8d6e63','expense'),
       c('Здоровье','💊','#ef5350','expense'),c('Досуг','🎬','#ab47bc','expense'),c('Одежда','👕','#ec407a','expense'),c('Связь','📱','#26c6da','expense'),
       c('Подарки','🎁','#ff7043','expense'),c('Другое','📦','#78909c','expense'),
@@ -1803,7 +1806,7 @@ function delEd(){
 }
 
 /* ---------- веб-версия (iPhone) ---------- */
-var WEBVER='3.2',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var WEBVER='3.3',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function standalone(){return !!navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)}
 function webNote(){
   var h='<div class="lbl">Веб-версия</div><div class="mut" style="font-size:13px;margin:0 4px 8px">';
