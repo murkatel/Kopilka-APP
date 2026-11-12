@@ -101,7 +101,9 @@ nav button.on i{filter:none;opacity:1}
 #ov.on{display:flex;align-items:flex-end}
 #dlg.on{display:flex;align-items:center;justify-content:center;z-index:20;padding:28px}
 #dlg .card{width:100%;max-width:340px;margin:0}
-.sheet{background:var(--bg);width:100%;max-height:96%;overflow-y:auto;border-radius:20px 20px 0 0;padding:10px 14px 14px;padding-bottom:max(14px,env(safe-area-inset-bottom));animation:up .26s cubic-bezier(.2,.85,.25,1)}
+.sheet{background:var(--bg);width:100%;max-height:96%;overflow:hidden;display:flex;flex-direction:column;border-radius:20px 20px 0 0;}
+#sheet{flex:1;min-height:0;overflow-y:auto;padding:10px 14px 14px;padding-bottom:max(14px,env(safe-area-inset-bottom))}
+.sheet{animation:up .26s cubic-bezier(.2,.85,.25,1)}
 @keyframes up{from{transform:translateY(90px);opacity:0}}
 .sh{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .sh .ttl{flex:1;font-weight:600;font-size:17px;text-align:center}
@@ -120,7 +122,7 @@ nav button.on i{filter:none;opacity:1}
 .keys button.op{background:var(--chip);color:var(--pri);font-size:22px}
 .keys button:active{filter:brightness(.9)}
 .pick{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;max-height:178px;overflow-y:auto}
-.pick.col{max-height:none}
+.pick.col{max-height:none;overflow:visible;padding:4px}
 .pick.col button{display:flex;align-items:center;justify-content:center}
 .pick button{aspect-ratio:1;border-radius:10px;font-size:20px;border:2px solid transparent}
 .pick button.on{border-color:var(--pri);background:var(--card)}
@@ -264,7 +266,7 @@ nav button.on i{transform:translateY(-1px) scale(1.12)}
     <button data-tab="stat" onclick="go('stat')"><i>📊</i>Обзор</button>
   </nav>
 </div>
-<div id="ov" onclick="if(event.target===this)closeSheet()"><div class="sheet" id="sheet"></div></div>
+<div id="ov" onclick="if(event.target===this)closeSheet()"><div class="sheet"><div id="sheet"></div></div></div>
 <div id="dlg"><div class="card" id="dlgc"></div></div>
 <div id="trash">🗑️ Перетащите сюда, чтобы удалить</div>
 <div id="toast"></div>
@@ -1598,7 +1600,7 @@ window.onAction=function(){
 
 /* ---------- sheets / dialogs ---------- */
 var ovT=0;
-function sheet(html){if(J3.ok)J3.unmount();clearTimeout(ovT);var o=document.getElementById('ov');o.classList.remove('closing');document.getElementById('sheet').innerHTML=html;o.classList.add('on')}
+function sheet(html){if(J3.ok)J3.unmount();clearTimeout(ovT);var o=document.getElementById('ov'),was=o.classList.contains('on'),el=document.getElementById('sheet');o.classList.remove('closing');el.innerHTML=html;o.classList.add('on');if(!was)el.scrollTop=0}
 function closeSheet(){var o=document.getElementById('ov');F=null;if(document.activeElement)document.activeElement.blur();if(!o.classList.contains('on')||o.classList.contains('closing'))return;
   o.classList.add('closing');clearTimeout(ovT);ovT=setTimeout(function(){o.classList.remove('on');o.classList.remove('closing');if(J3.ok)J3.unmount()},170)}
 function sheetOpen(){var c=document.getElementById('ov').classList;return c.contains('on')&&!c.contains('closing')}
@@ -1720,7 +1722,7 @@ function drawEd(){
   if(!isC)h+='<div class="lbl">Валюта счёта</div><select onchange="E.cur=this.value">'+Object.keys(CUR).map(function(k){return '<option value="'+k+'"'+(E.cur===k?' selected':'')+'>'+k+' — '+CUR[k]+'</option>'}).join('')+'</select>';
   if(!isC)h+='<div class="lbl">Начальный остаток</div><input inputmode="decimal" placeholder="0" value="'+esc(E.num)+'" oninput="E.num=this.value">';
   else if(E.type==='expense')h+='<div class="lbl">Бюджет на месяц (необязательно)</div><input inputmode="decimal" placeholder="Без лимита" value="'+esc(E.num)+'" oninput="E.num=this.value">'+
-    '<div class="lbl">Неизрасходованный остаток бюджета</div><div class="seg"><button class="'+(!E.roll?'on':'')+'" onclick="E.roll=false;drawEd()">Сгорает</button><button class="'+(E.roll?'on':'')+'" onclick="E.roll=true;drawEd()">Переносится на следующий месяц</button></div>';
+    '<div class="lbl">Неизрасходованный остаток бюджета</div><div class="seg"><button class="'+(!E.roll?'on':'')+'" onclick="E.roll=false;drawEd()">Сгорает</button><button class="'+(E.roll?'on':'')+'" onclick="E.roll=true;drawEd()">Переносится</button></div>';
   h+='<div style="height:14px"></div><button class="btn" onclick="saveEd()">Сохранить</button>';
   if(E.id)h+='<button class="btn danger" onclick="delEd()">Удалить</button>';
   sheet(h);
@@ -1806,7 +1808,7 @@ function delEd(){
 }
 
 /* ---------- веб-версия (iPhone) ---------- */
-var WEBVER='3.3',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var WEBVER='3.4',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function standalone(){return !!navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)}
 function webNote(){
   var h='<div class="lbl">Веб-версия</div><div class="mut" style="font-size:13px;margin:0 4px 8px">';
@@ -1831,7 +1833,7 @@ function openSettings(){
      '<div class="seg" style="margin:0 0 8px"><button class="'+(S.autoUpdate!==false?'on':'')+'" onclick="S.autoUpdate=true;save();openSettings()">Проверять при запуске</button><button class="'+(S.autoUpdate===false?'on':'')+'" onclick="S.autoUpdate=false;save();openSettings()">Только вручную</button></div>'+
      '<button class="btn ghost" onclick="checkUpdate(true)">🔄 Проверить обновления</button>';
   h+='<div class="lbl">Основная валюта</div><select onchange="S.currency=this.value;save();render();refreshRates(false);openSettings()">'+FXC.map(function(k){return '<option value="'+k+'"'+(main()===k?' selected':'')+'>'+k+' — '+CUR[k]+'</option>'}).join('')+'</select>';
-  var used={},rl=[],tb=fxTable(today());S.accounts.forEach(function(a){if(a.currency!==main())used[a.currency]=1});
+  var used={},rl=[],tb=fxTable(today());if(main()!=='USD')used.USD=1;S.accounts.forEach(function(a){if(a.currency!==main())used[a.currency]=1});
   Object.keys(used).forEach(function(c){if(tb&&tb[c]&&tb[main()])rl.push('1 '+sym(c)+' = '+(tb[main()]/tb[c]).toLocaleString('ru-RU',{maximumFractionDigits:4})+' '+sym(main()))});
   h+='<div class="mut" style="font-size:13px;margin:8px 4px">Все суммы показываются в основной валюте. Операции пересчитываются по курсу на свой день, остатки счетов — по текущему. Валюта каждого счёта задаётся в его настройках.<br>'+
      (S.fxDate?'Курс от '+S.fxDate.split('-').reverse().join('.')+(rl.length?': '+rl.join(', '):''):'Курс ещё не загружен')+'</div>'+
