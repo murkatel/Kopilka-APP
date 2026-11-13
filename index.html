@@ -1620,7 +1620,7 @@ window.onAction=function(){
 /* ---------- sheets / dialogs ---------- */
 var ovT=0;
 function sheet(html){if(J3.ok)J3.unmount();clearTimeout(ovT);var o=document.getElementById('ov'),was=o.classList.contains('on'),el=document.getElementById('sheet');o.classList.remove('closing');el.innerHTML=html;o.classList.add('on');if(!was)el.scrollTop=0}
-function closeSheet(){var o=document.getElementById('ov');F=null;PC=null;if(document.activeElement)document.activeElement.blur();if(!o.classList.contains('on')||o.classList.contains('closing'))return;
+function closeSheet(){var o=document.getElementById('ov');F=null;CPK=null;if(document.activeElement)document.activeElement.blur();if(!o.classList.contains('on')||o.classList.contains('closing'))return;
   o.classList.add('closing');clearTimeout(ovT);ovT=setTimeout(function(){o.classList.remove('on');o.classList.remove('closing');if(J3.ok)J3.unmount()},170)}
 function sheetOpen(){var c=document.getElementById('ov').classList;return c.contains('on')&&!c.contains('closing')}
 var dlgCb=null;
@@ -1827,7 +1827,7 @@ function delEd(){
 }
 
 /* ---------- веб-версия (iPhone) ---------- */
-var WEBVER='3.6',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var WEBVER='3.7',IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function standalone(){return !!navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)}
 function webNote(){
   var h='<div class="lbl">Веб-версия</div><div class="mut" style="font-size:13px;margin:0 4px 8px">';
@@ -1844,28 +1844,28 @@ function webInit(){
 }
 
 /* ---------- выбор валюты ---------- */
-var PC=null,PCATS=[['main','Основные','Основные валюты'],['oth','Другие','Другие валюты'],['cry','Крипто','Криптовалюты'],['met','Металлы','Драгоценные металлы']];
+var CPK=null,PCATS=[['main','Основные','Основные валюты'],['oth','Другие','Другие валюты'],['cry','Крипто','Криптовалюты'],['met','Металлы','Драгоценные металлы']];
 function curBtn(c,js,short){return '<button class="selbtn"'+(short?' style="flex:0 0 38%"':'')+' onclick="'+js+'">'+c+(short?(CUR[c]?' — '+CUR[c]:''):' — '+esc(curName(c)))+'</button>'}
 function curList(k){return k==='main'?MAINC:k==='cry'?Object.keys(CRY):k==='met'?Object.keys(MET):Object.keys(RUN).filter(function(c){return MAINC.indexOf(c)<0})}
-function pickCur(sel,onPick,onBack){PC={sel:sel,pick:onPick,back:onBack,cat:curCat(sel),q:''};drawPick()}
+function pickCur(sel,onPick,onBack){CPK={sel:sel,pick:onPick,back:onBack,cat:curCat(sel),q:''};drawPick()}
 function drawPick(){
-  var h='<div class="pchead"><div class="sh"><button class="ib" onclick="PC.back()">‹</button><span class="ttl">Выбор валюты</span><span style="width:42px"></span></div>'+
-    '<input id="pcq" placeholder="🔍 Поиск: название или код" value="'+esc(PC.q)+'" oninput="PC.q=this.value;pickList()">'+
-    '<div class="seg" id="pcseg" style="margin-top:8px">'+PCATS.map(function(x){return '<button data-k="'+x[0]+'" onclick="PC.cat=\''+x[0]+'\';PC.q=\'\';document.getElementById(\'pcq\').value=\'\';pickList();document.getElementById(\'sheet\').scrollTop=0">'+x[1]+'</button>'}).join('')+'</div></div><div id="pcl"></div>';
+  var h='<div class="pchead"><div class="sh"><button class="ib" onclick="CPK.back()">‹</button><span class="ttl">Выбор валюты</span><span style="width:42px"></span></div>'+
+    '<input id="pcq" placeholder="🔍 Поиск: название или код" value="'+esc(CPK.q)+'" oninput="CPK.q=this.value;pickList()">'+
+    '<div class="seg" id="pcseg" style="margin-top:8px">'+PCATS.map(function(x){return '<button data-k="'+x[0]+'" onclick="CPK.cat=\''+x[0]+'\';CPK.q=\'\';document.getElementById(\'pcq\').value=\'\';pickList();document.getElementById(\'sheet\').scrollTop=0">'+x[1]+'</button>'}).join('')+'</div></div><div id="pcl"></div>';
   sheet(h);document.getElementById('sheet').scrollTop=0;pickList();
 }
 function pickList(){
-  var el=document.getElementById('pcl');if(!el)return;var q=PC.q.trim().toLowerCase(),h='';
-  [].forEach.call(document.querySelectorAll('#pcseg button'),function(b){b.className=!q&&b.getAttribute('data-k')===PC.cat?'on':''});
+  var el=document.getElementById('pcl');if(!el)return;var q=CPK.q.trim().toLowerCase(),h='';
+  [].forEach.call(document.querySelectorAll('#pcseg button'),function(b){b.className=!q&&b.getAttribute('data-k')===CPK.cat?'on':''});
   PCATS.forEach(function(x){
-    if(!q&&x[0]!==PC.cat)return;
+    if(!q&&x[0]!==CPK.cat)return;
     var l=curList(x[0]).filter(function(c){return !q||c.toLowerCase().indexOf(q)>=0||curName(c).toLowerCase().indexOf(q)>=0||(CUR[c]||'').toLowerCase()===q});
     if(!l.length)return;
     h+='<div class="h">'+x[2]+(q?' · '+l.length:'')+'</div><div class="card" style="padding:4px 12px">'+l.map(function(c){var sm=CUR[c]||c;
-      return '<div class="row" style="padding:8px 2px" onclick="curPicked(\''+c+'\')"><span class="circ sm" style="background:var(--chip);color:var(--text);font-weight:700;font-size:'+(sm.length>3?9:sm.length>2?11:15)+'px">'+esc(sm)+'</span><div class="t"><div>'+c+'</div><small>'+esc(curName(c))+'</small></div>'+(c===PC.sel?'<b style="color:var(--pri);font-size:18px">✓</b>':'')+'</div>'}).join('')+'</div>'});
+      return '<div class="row" style="padding:8px 2px" onclick="curPicked(\''+c+'\')"><span class="circ sm" style="background:var(--chip);color:var(--text);font-weight:700;font-size:'+(sm.length>3?9:sm.length>2?11:15)+'px">'+esc(sm)+'</span><div class="t"><div>'+c+'</div><small>'+esc(curName(c))+'</small></div>'+(c===CPK.sel?'<b style="color:var(--pri);font-size:18px">✓</b>':'')+'</div>'}).join('')+'</div>'});
   el.innerHTML=h||'<div class="empty">Ничего не найдено</div>';
 }
-function curPicked(c){var p=PC;PC=null;p.pick(c);refreshRates(false)}
+function curPicked(c){var p=CPK;CPK=null;p.pick(c);refreshRates(false)}
 
 /* ---------- settings ---------- */
 var DATA_BTNS='<button class="btn ghost" onclick="exportJson()">💾 Сохранить резервную копию</button><button class="btn ghost" onclick="importJson()">📂 Восстановить из копии</button><button class="btn ghost" onclick="exportCsv()">📄 Экспорт операций в CSV</button><button class="btn danger" onclick="wipe()">Удалить все данные</button>';
@@ -1987,7 +1987,7 @@ window.onUpdateState=function(st,msg){drawUpd(st,msg)};
 /* ---------- back button (called from Android) ---------- */
 window.handleBack=function(){
   if(document.getElementById('dlg').classList.contains('on')){closeDlg();return true}
-  if(sheetOpen()&&PC&&document.getElementById('pcl')){var pb=PC.back;PC=null;pb();return true}
+  if(sheetOpen()&&CPK&&document.getElementById('pcl')){var pb=CPK.back;CPK=null;pb();return true}
   if(sheetOpen()){closeSheet();return true}
   if(editMode){editMode=false;render();return true}
   if(tab!=='home'){go('home');return true}
